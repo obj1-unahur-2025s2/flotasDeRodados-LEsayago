@@ -1,0 +1,57 @@
+import rodados.*
+
+describe "probando un Corsa" {
+  const corsita = new Corsa(color = azul)
+  
+  test "Su capacidad" {
+    assert.equals(4, corsita.capacidad())
+  }
+
+  test "su velocidad" {
+    assert.equals(150, corsita.velMaxima())
+  }
+
+  test "su peso" {
+    assert.equals(1300, corsita.peso())
+  }
+  
+  test "su color" {
+    assert.equals(azul, corsita.color())
+  }
+}
+
+describe "probando un Kwid" {
+  const kwid1 = new Kwid(tieneTanqueAdicional= true)
+  const kwid2 = new Kwid(tieneTanqueAdicional= false)
+  test "Su capacidad" {
+    assert.equals(3, kwid1.capacidad())
+    assert.equals(4, kwid2.capacidad())
+  }
+
+  test "su velocidad" {
+    assert.equals(120, kwid1.velMaxima())
+    assert.equals(110, kwid2.velMaxima())
+  }
+
+  test "su peso" {
+    assert.equals(1350, kwid1.peso())
+    assert.equals(1200, kwid2.peso())
+  }
+  
+  test "su color" {
+    assert.equals(azul, kwid1.color())
+  }
+}
+
+describe "La Trafic" {
+
+  test "capacidad Con Interior comodo" {
+    assert.equals(5, trafic.capacidad())
+
+  }
+
+  test "capacidad Con Interior popular" {
+    trafic.cambiarInterior(popular)
+    assert.equals(5, trafic.capacidad())
+}
+}
