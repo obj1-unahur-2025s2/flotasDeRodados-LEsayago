@@ -1,7 +1,7 @@
 import wollok.game.*
 
 import example.pepita
-
+/*
 program PepitaGame {
 	game.title("Pepita")
 	game.height(10)
@@ -16,14 +16,20 @@ program PepitaGame {
 
 	game.start()
 }
+*/
 
-class rodado{
-	var capacidad = 0
-	var velMaxima= 0
-	var color= "blanco"
-	var peso = 0
+class Rodado{
+	const capacidad =0
+	var velMaxima=0
+	var color
+	var peso =0
+	
+
+
 	method capacidad()= capacidad 
 	method velMaxima() = velMaxima
 	method color() = color
 	method peso() = peso  
 }
+
+const corsa = new Rodado()
