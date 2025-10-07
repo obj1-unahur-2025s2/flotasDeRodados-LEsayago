@@ -36,15 +36,6 @@ class Kwid {
   
   method peso() = 1200 + if (tieneTanqueAdicional) 150 else 0
 }
-
-object azul {
-  
-}
-
-object blanco {
-  
-}
-
 object trafic {
   var interior = comodo
   var motor = pulenta
@@ -57,7 +48,7 @@ object trafic {
   
   method color() = blanco
   
-  method combiarMotor(nuevoMotor) {
+  method cambiarMotor(nuevoMotor) {
     motor = nuevoMotor
   }
   
@@ -89,3 +80,12 @@ object bataton {
   
   method velMaxima() = 80
 }
+
+// colores
+object azul {}
+object rojo { }
+object verde { }
+object beige { }
+object negro { }
+object blanco {}
+object gris {}

@@ -1,0 +1,128 @@
+import rodados.*
+import dependencias.*
+
+describe "Dependencia Deportes" {
+
+  var cachito
+  var deportes
+
+  method initialize() {
+    cachito = new Corsa(color = rojo)
+    deportes = new Dependencia(cantidadDeEmpleados = 45)
+
+    // 🚘 Flota de Deportes
+    deportes.agregarAFlota(cachito)
+    deportes.agregarAFlota(new Corsa(color = azul))
+    deportes.agregarAFlota(new Corsa(color = verde))
+    deportes.agregarAFlota(new Kwid(tieneTanqueAdicional = true))
+    deportes.agregarAFlota(
+      new AutoEspecial(capacidad = 5, velMaxima = 160, peso = 1200, color = beige)
+    )
+  }
+
+  test "peso total de la flota" {
+    assert.equals(6500, deportes.pesoTotalFlota()) // 1300*3 + 1350 + 1200
+  }
+
+  test "flota bien equipada" {
+    assert.that(deportes.estaBienEquipada()) // todos >= 100 km/h
+  }
+
+  test "capacidad total en color azul" {
+    assert.equals(4, deportes.capacidadTotalEnColor(azul)) // solo el corsa azul
+  }
+
+  test "color del rodado más rápido" {
+    assert.equals(beige, deportes.colorDelRodadoMasRapido()) // el especial (160 km/h)
+  }
+
+  test "la dependencia es grande" {
+    assert.that(deportes.esGrande()) // 45 empleados y 5 rodados
+  }
+
+  test "capacidad faltante" {
+    assert.equals(25, deportes.capacidadFaltante()) // faltan 25 lugares (45 - 20)
+  }
+}
+
+describe "Dependencia Cultura" {
+
+  var cachito
+  var cultura
+
+  method initialize() {
+    cachito = new Corsa(color = rojo)
+    cultura = new Dependencia(cantidadDeEmpleados = 31)
+
+    // 🚘 Flota de Cultura
+    cultura.agregarAFlota(cachito)
+    cultura.agregarAFlota(new Kwid(tieneTanqueAdicional = true))
+    cultura.agregarAFlota(new Kwid(tieneTanqueAdicional = true))
+    cultura.agregarAFlota(new Kwid(tieneTanqueAdicional = false))
+
+    // 🚐 Configuración de la trafic
+    trafic.cambiarInterior(popular)
+    trafic.cambiarMotor(bataton)
+    cultura.agregarAFlota(trafic)
+  }
+
+  test "peso total de la flota" {
+    assert.equals(5700, cultura.pesoTotalFlota())
+  }
+
+  test "flota bien equipada" {
+    assert.notThat(cultura.estaBienEquipada()) // batatón 80 km/h
+  }
+
+  test "capacidad total en color azul" {
+    assert.equals(0, cultura.capacidadTotalEnColor(azul))
+  }
+
+  test "color del rodado más rápido" {
+    assert.equals(rojo, cultura.colorDelRodadoMasRapido()) // cachito 150 km/h
+  }
+
+  test "la dependencia es grande" {
+    assert.notThat(cultura.esGrande())
+  }
+
+  test "capacidad faltante" {
+    assert.equals(5, cultura.capacidadFaltante()) // faltan 5 lugares (31 - 26)
+  }
+}
+describe "Dependencia Salud" {
+
+  var salud
+  var ambulancia
+  var fiatito
+
+  method initialize() {
+    salud = new Dependencia(cantidadDeEmpleados = 25)
+    ambulancia = new AutoEspecial(capacidad = 2, velMaxima = 180, peso = 1400, color = blanco)
+    fiatito = new Corsa(color = gris)
+
+    salud.agregarAFlota(ambulancia)
+    salud.agregarAFlota(fiatito)
+    salud.agregarAFlota(new Kwid(tieneTanqueAdicional = false))
+  }
+
+  test "peso total de la flota" {
+    assert.equals(3900, salud.pesoTotalFlota()) // 1400 + 1300 + 1200
+  }
+
+  test "flota bien equipada" {
+    assert.that(salud.estaBienEquipada()) // todos superan 100 km/h
+  }
+
+  test "color del rodado más rápido" {
+    assert.equals(blanco, salud.colorDelRodadoMasRapido()) // ambulancia 180 km/h
+  }
+
+  test "la dependencia es grande" {
+    assert.notThat(salud.esGrande()) // pocos empleados y rodados
+  }
+
+  test "capacidad faltante" {
+    assert.equals(17, salud.capacidadFaltante()) // 25 - 8
+  }
+}
